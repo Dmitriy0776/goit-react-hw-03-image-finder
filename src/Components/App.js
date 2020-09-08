@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import SearchForm from '../Components/SearchForm/searchForm';
-import Gallery from '../Components/Gallery/gallery';
-import Modal from '../Components/Modal/modal';
+import SearchForm from './SearchForm/searchForm';
+import Gallery from './Gallery/gallery';
+import Modal from './Modal/modal';
 import fetchPhoto from '../services/api';
-import './app.module.css';
+import s from './app.module.css';
 
 const incrementPageNumber = 1;
 
@@ -83,13 +83,28 @@ class App extends Component {
     e.preventDefault();
     this.setState({ pageNumber: 1 });
     this.fetchingNewImg();
+    this.reset();
+  };
+
+  reset = () => {
+    this.setState({
+      inputSearch: '',
+    });
   };
 
   openModalWindow = url => {
-    this.setState({
-      isModalOpen: true,
-      largeImageURL: url,
-    });
+    this.setState(
+      {
+        isModalOpen: true,
+        largeImageURL: url,
+      },
+      () =>
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        }),
+    );
+    document.querySelector('body').style.overflow = 'hidden';
   };
 
   closeModalWindow = e => {
@@ -99,12 +114,13 @@ class App extends Component {
     this.setState({
       isModalOpen: false,
     });
+    document.querySelector('body').style.overflow = 'auto';
   };
 
   render() {
     const { imagesArr, inputSearch, isModalOpen, largeImageURL } = this.state;
     return (
-      <div className="app">
+      <div className={s.app}>
         <SearchForm
           onSubmitForm={this.onSubmitForm}
           onChangeInput={this.handleChangeInput}

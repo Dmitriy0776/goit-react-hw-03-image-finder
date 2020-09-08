@@ -3,7 +3,7 @@ import axios from 'axios';
 axios.defaults.baseURL = 'https://pixabay.com/api/';
 
 const fetchPhoto = (pageNumber = 1, inputSearch = 'cat') => {
-  const key = `$key=${process.env.REACT_APP_PIXABAY_API_KEY}`;
+  const key = `&key=${process.env.REACT_APP_PIXABAY_API_KEY}`;
   const setting = '?image_type=photo&orientation=horizontal';
   const perPage = '&per_page=12';
   const page = `&page=${pageNumber}`;

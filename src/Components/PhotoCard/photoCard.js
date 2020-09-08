@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './photoCard.module.css';
 
 const photoCard = ({
+  id,
   webformatURL,
   largeImageURL,
   openModal,
@@ -12,7 +13,7 @@ const photoCard = ({
   downloads,
 }) => {
   return (
-    <li className={styles.gallery_item}>
+    <li key={id} className={styles.gallery_item}>
       <div className={styles.photo_card}>
         <img src={webformatURL} alt="imghere" />
         <div className={styles.stats}>
@@ -55,6 +56,7 @@ photoCard.propTypes = {
   comments: PropTypes.number.isRequired,
   downloads: PropTypes.number.isRequired,
   openModal: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
 };
 
 export default photoCard;
